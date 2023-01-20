@@ -1,11 +1,16 @@
-<script setup>
+<script lang="ts" setup>
+import { PropType } from "vue"
+
 defineProps({
-    value: String,
-});
+    value: {
+        type: String as PropType<string | boolean>,
+        default: "",
+    },
+})
 </script>
 
 <template>
-    <label class="block font-medium text-sm text-gray-700">
+    <label class="block text-sm font-medium text-gray-700">
         <span v-if="value">{{ value }}</span>
         <span v-else><slot /></span>
     </label>

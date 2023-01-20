@@ -1,7 +1,12 @@
-<script setup>
+<script lang="ts" setup>
+import { PropType } from "vue"
+
 defineProps({
-    message: String,
-});
+    message: {
+        type: String as PropType<string | undefined>,
+        default: undefined,
+    },
+})
 </script>
 
 <template>
