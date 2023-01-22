@@ -2,37 +2,22 @@
 
 namespace Domain\User\Actions\Fortify;
 
+use Domain\User\Data\UserCreateData;
 use Domain\User\Models\User;
 use Domain\Team\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
 
-class CreateNewUser implements CreatesNewUsers
+class CreateNewUser
 {
     use PasswordValidationRules;
 
-    /**
-     * Create a newly registered user.
-     *
-     * @param  array<string, string>  $input
-     */
-    public function create(array $input): User
+    public function create(UserCreateData $userData): User
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
-
-        return DB::transaction(function () use ($input) {
+        return DB::transaction(function () use ($userData) {
             return tap(User::create([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password']),
+                ...$userData->all(),
+                'password' => Hash::make($userData->password),
             ]), function (User $user) {
                 $this->createTeam($user);
             });

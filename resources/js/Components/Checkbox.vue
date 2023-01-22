@@ -3,7 +3,7 @@ import { computed, PropType } from "vue"
 
 const props = defineProps({
     checked: {
-        type: [Array, Boolean] as PropType<string[] | boolean>,
+        type: [Array, Boolean] as PropType<string[] | boolean | null>,
         default: false,
     },
     value: {
@@ -16,7 +16,7 @@ const emit = defineEmits(["update:checked"])
 
 const proxyChecked = computed({
     get(): string[] | boolean {
-        return props.checked
+        return props.checked!
     },
 
     set(val: string[] | boolean) {

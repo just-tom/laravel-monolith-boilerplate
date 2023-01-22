@@ -7,7 +7,7 @@ import SecondaryButton from "./SecondaryButton.vue"
 import TextInput from "./TextInput.vue"
 import { route } from "momentum-trail"
 import axios from "axios"
-import { UserData } from "@/types/models"
+import { UserPasswordData } from "@/types/models"
 
 defineProps({
     title: {
@@ -29,7 +29,7 @@ const emit = defineEmits(["confirmed"])
 const confirmingPassword = ref<boolean>(false)
 
 const form = reactive<{
-    password: UserData["password"]
+    password: UserPasswordData["password"]
     error: string
     processing: boolean
 }>({

@@ -3,10 +3,13 @@
 namespace Domain\Team\Data;
 
 use Carbon\Carbon;
+use Domain\Team\Models\Team;
 use Domain\User\Data\UserData;
 use Domain\User\Models\User;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Rules\Role;
 use Spatie\LaravelData\Attributes\MapName;
@@ -22,14 +25,19 @@ class TeamInvitationData extends Data
         public readonly ?int $teamId,
         public readonly string $email,
         public readonly string $role,
-        public readonly ?Carbon $createdAt,
-        public readonly ?Carbon $updatedAt
     ) {}
 
     public static function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'exists:users'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('team_invitations')->where(function (Builder $query) {
+                    $team = Team::find(request('team'));
+                    $query->where('team_id', $team->id);
+                })
+            ],
             'role' => Jetstream::hasRoles()
                 ? ['required', 'string', new Role]
                 : null,
@@ -40,7 +48,7 @@ class TeamInvitationData extends Data
     {
         $validator->after(function ($validator) {
             $validator->errors()->addIf(
-                request('team')->hasUserWithEmail(request('email')),
+                (Team::find(request('team')))->hasUserWithEmail(request('email')),
                 'email',
                 __('This user already belongs to the team.')
             );

@@ -63,7 +63,7 @@ const createApiToken = () => {
 }
 
 const manageApiTokenPermissions = (token: ApiTokenData) => {
-    updateApiTokenForm.permissions = token.abilities
+    updateApiTokenForm.permissions = token.abilities!
     managingPermissionsFor.value = token
 }
 

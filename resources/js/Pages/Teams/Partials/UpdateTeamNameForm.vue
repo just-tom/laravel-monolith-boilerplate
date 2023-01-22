@@ -8,7 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { PropType } from "vue"
 import { route } from "momentum-trail"
-import { TeamData, TeamPermissionsData } from "@/types/models"
+import {TeamData, TeamPermissionsData, TeamUpdateData} from "@/types/models"
 
 const props = defineProps({
     team: {
@@ -22,7 +22,7 @@ const props = defineProps({
 })
 
 const form = useForm<{
-    name: TeamData["name"]
+    name: TeamUpdateData["name"]
 }>({
     name: props.team.name,
 })

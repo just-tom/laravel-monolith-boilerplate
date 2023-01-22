@@ -8,10 +8,10 @@ import InputLabel from "@/Components/InputLabel.vue"
 import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
-import { UserData } from "@/types/models"
+import { UserPasswordData } from "@/types/models"
 
 const form = useForm<{
-    password: UserData["password"]
+    password: UserPasswordData["password"]
 }>({
     password: "",
 })

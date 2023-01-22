@@ -8,13 +8,13 @@ import InputError from "@/Components/InputError.vue"
 import SecondaryButton from "@/Components/SecondaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
-import { UserData } from "@/types/models"
+import { UserPasswordData } from "@/types/models"
 
 const confirmingUserDeletion = ref<boolean>(false)
 const passwordInput = ref<HTMLInputElement | null>(null)
 
 const form = useForm<{
-    password: UserData["password"]
+    password: UserPasswordData["password"]
 }>({
     password: "",
 })

@@ -9,7 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import SecondaryButton from "@/Components/SecondaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
-import { SessionData, UserData } from "@/types/models"
+import { SessionData, UserPasswordData } from "@/types/models"
 
 defineProps({
     sessions: {
@@ -22,7 +22,7 @@ const confirmingLogout = ref<boolean>(false)
 const passwordInput = ref<HTMLInputElement | null>(null)
 
 const form = useForm<{
-    password: UserData["password"]
+    password: UserPasswordData["password"]
 }>({
     password: "",
 })

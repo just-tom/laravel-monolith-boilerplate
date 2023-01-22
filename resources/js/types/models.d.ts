@@ -5,14 +5,17 @@ export type AgentData = {
 }
 export type ApiTokenData = {
     id?: number
-    name: string
-    abilities: Array<string>
+    name?: string
+    abilities: Array<string> | null
+    permissions: Array<string> | null
     last_used_ago: string | null
     last_used_at: string | null
-    tokenable_id: number
-    tokenable_type: string
-    created_at: string | null
-    updated_at: string | null
+    tokenable_id: number | null
+    tokenable_type: string | null
+}
+export type NotificationData = {
+    type: any
+    body: string
 }
 export type RoleData = {
     key: string
@@ -26,30 +29,31 @@ export type SessionData = {
     last_active: string
     agent: AgentData
 }
+export type SharedData = {
+    user: UserData
+    notification: NotificationData | null
+}
+export type TeamCreateData = {
+    name: string
+}
 export type TeamData = {
     id?: number
-    owner: UserData
     name: string
     personal_team: boolean
+    owner: UserData
     users: Array<UserData>
     team_invitations: Array<TeamInvitationData>
-    created_at: string | null
-    updated_at: string | null
 }
 export type TeamInvitationData = {
     id?: number
     team_id: number | null
     email: string
     role: string
-    created_at: string | null
-    updated_at: string | null
 }
 export type TeamMemberData = {
-    team_id: number
-    user_id: number
+    team_id?: number
+    user_id?: number
     role: string
-    created_at: string
-    updated_at: string
 }
 export type TeamPermissionsData = {
     canAddTeamMembers: boolean
@@ -57,22 +61,40 @@ export type TeamPermissionsData = {
     canRemoveTeamMembers: boolean
     canUpdateTeam: boolean
 }
+export type TeamUpdateData = {
+    name: string
+}
+export type UserCreateData = {
+    name: string
+    email: string
+    password: string
+    password_confirmation: string
+    terms?: boolean | Array<string>
+    remember?: boolean | Array<string>
+}
 export type UserData = {
     id?: number
     name: string
     email: string
     email_verified_at: string | null
-    password: string
-    profile_photo_url: string
-    profile_photo_path: string
-    password_confirmation: string
-    current_password: string
+    profile_photo_url?: string
+    profile_photo_path?: string
     current_team: TeamData | null
     all_teams: Array<TeamData> | null
     two_factor_enabled: boolean | null
-    terms: boolean | Array<string>
-    remember: boolean | Array<string>
     membership?: TeamMemberData
+    remember: boolean | Array<string> | null
     created_at: string | null
     updated_at: string | null
+}
+export type UserPasswordData = {
+    password: string
+    current_password: string
+    password_confirmation: string
+}
+export type UserUpdateData = {
+    id?: number
+    name: string
+    email: string
+    profile_photo_path: string | null
 }

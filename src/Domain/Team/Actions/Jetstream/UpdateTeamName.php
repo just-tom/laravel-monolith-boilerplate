@@ -2,6 +2,7 @@
 
 namespace Domain\Team\Actions\Jetstream;
 
+use Domain\Team\Data\TeamUpdateData;
 use Domain\Team\Models\Team;
 use Domain\User\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -15,16 +16,12 @@ class UpdateTeamName implements UpdatesTeamNames
      *
      * @param  array<string, string>  $input
      */
-    public function update(User $user, Team $team, array $input): void
+    public function update(User $user, Team $team, TeamUpdateData $teamUpdateData): void
     {
         Gate::forUser($user)->authorize('update', $team);
 
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-        ])->validateWithBag('updateTeamName');
-
         $team->forceFill([
-            'name' => $input['name'],
+            'name' => $teamUpdateData->name,
         ])->save();
     }
 }

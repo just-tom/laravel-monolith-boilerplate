@@ -10,7 +10,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
 import { Method } from "@inertiajs/core"
-import { UserData } from "@/types/models"
+import { UserData, UserUpdateData } from "@/types/models"
 
 const props = defineProps({
     user: {
@@ -21,8 +21,8 @@ const props = defineProps({
 
 const form = useForm<{
     _method: Method.PUT
-    name: UserData["name"]
-    email: UserData["email"]
+    name: UserUpdateData["name"]
+    email: UserUpdateData["email"]
     photo: File | null
 }>({
     _method: Method.PUT,

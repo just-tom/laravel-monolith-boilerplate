@@ -3,7 +3,7 @@ import { onMounted, PropType, ref } from "vue"
 
 defineProps({
     modelValue: {
-        type: String as PropType<string>,
+        type: String as PropType<string | undefined>,
         required: true,
     },
     autocomplete: {

@@ -6,8 +6,11 @@ import InputLabel from "@/Components/InputLabel.vue"
 import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
+import {TeamCreateData} from "@/types/models";
 
-const form = useForm({
+const form = useForm<{
+    name: TeamCreateData['name']
+}>({
     name: "",
 })
 

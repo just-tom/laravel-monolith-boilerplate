@@ -9,7 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
 import { PropType } from "vue"
-import { UserData } from "@/types/models"
+import { UserData, UserPasswordData } from "@/types/models"
 
 defineProps({
     canResetPassword: Boolean as PropType<boolean>,
@@ -21,7 +21,7 @@ defineProps({
 
 const form = useForm<{
     email: UserData["email"]
-    password: UserData["password"]
+    password: UserPasswordData["password"]
     remember: UserData["remember"]
 }>({
     email: "",

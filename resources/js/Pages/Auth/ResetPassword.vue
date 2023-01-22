@@ -8,7 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
 import { PropType } from "vue"
-import { UserData } from "@/types/models"
+import { UserData, UserPasswordData } from "@/types/models"
 
 const props = defineProps({
     email: {
@@ -24,8 +24,8 @@ const props = defineProps({
 const form = useForm<{
     token: string
     email: UserData["email"]
-    password: UserData["password"]
-    password_confirmation: UserData["password_confirmation"]
+    password: UserPasswordData["password"]
+    password_confirmation: UserPasswordData["password_confirmation"]
 }>({
     token: props.token,
     email: props.email,

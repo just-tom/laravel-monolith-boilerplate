@@ -3,7 +3,6 @@
 namespace Domain\Team\Data;
 
 use Carbon\Carbon;
-use Domain\Team\Models\Team;
 use Domain\User\Data\UserData;
 use Domain\User\Models\User;
 use Illuminate\Http\Request;
@@ -16,17 +15,10 @@ use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
 
-class TeamData extends Data
+class TeamCreateData extends Data
 {
     public function __construct(
-        public readonly int | Optional $id,
         public readonly string $name,
-        public readonly bool $personalTeam,
-        public readonly UserData $owner,
-        /** @var DataCollection<UserData> */
-        public readonly DataCollection $users,
-        /** @var DataCollection<TeamInvitationData> */
-        public readonly DataCollection $teamInvitations,
     ) {}
 
     public static function withValidator(Validator $validator): void
@@ -45,17 +37,6 @@ class TeamData extends Data
     {
         return self::from([
             ...$request->all(),
-            'owner' => UserData::from(User::find($request->user_id)),
-        ]);
-    }
-
-    public static function fromModel(Team $team): self
-    {
-        return self::from([
-            ...$team->toArray(),
-            'owner' => UserData::from(User::find($team->user_id)),
-            'users' => UserData::collection($team->users),
-            'team_invitations' => TeamInvitationData::collection($team->teamInvitations)
         ]);
     }
 }
