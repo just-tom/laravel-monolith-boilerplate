@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Domain\Global\Enums\NotificationType;
 use Domain\Team\Actions\Jetstream\AddTeamMember;
 use Domain\Team\Actions\Jetstream\CreateTeam;
 use Domain\Team\Actions\Jetstream\DeleteTeam;
@@ -9,6 +10,7 @@ use Domain\Team\Actions\Jetstream\InviteTeamMember;
 use Domain\Team\Actions\Jetstream\RemoveTeamMember;
 use Domain\Team\Actions\Jetstream\UpdateTeamName;
 use Domain\User\Actions\Jetstream\DeleteUser;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -41,6 +43,20 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
         Jetstream::deleteTeamsUsing(DeleteTeam::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        RedirectResponse::macro('banner', function ($message) {
+            return $this->with('notification', [
+                'type' => NotificationType::SUCCESS,
+                'body' => $message,
+            ]);
+        });
+
+        RedirectResponse::macro('dangerBanner', function ($message) {
+            return $this->with('notification', [
+                'type' => NotificationType::ERROR,
+                'body' => $message,
+            ]);
+        });
     }
 
     /**

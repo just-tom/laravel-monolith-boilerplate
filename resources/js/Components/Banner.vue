@@ -3,8 +3,8 @@ import { computed, ref, watch } from "vue"
 import { usePage } from "@inertiajs/vue3"
 
 const show = ref<boolean>(true)
-const style = computed((): string => usePage<Props>().props.jetstream.flash?.bannerStyle || "success")
-const message = computed((): string => usePage<Props>().props.jetstream.flash?.banner || "")
+const style = computed((): string => usePage<Props>().props.notification?.type || "success")
+const message = computed((): string => usePage<Props>().props.notification?.body || "")
 
 watch(message, async () => {
     show.value = true

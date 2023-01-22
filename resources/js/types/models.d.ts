@@ -14,8 +14,12 @@ export type ApiTokenData = {
     tokenable_type: string | null
 }
 export type NotificationData = {
-    type: any
+    type: NotificationType
     body: string
+}
+export type NotificationType = {
+    name: string
+    value: string
 }
 export type RoleData = {
     key: string
