@@ -8,7 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { PropType } from "vue"
 import { route } from "momentum-trail"
-import {TeamData, TeamPermissionsData, TeamUpdateData} from "@/types/models"
+import { TeamData, TeamPermissionsData, TeamUpdateData } from "@/types/models"
 
 const props = defineProps({
     team: {

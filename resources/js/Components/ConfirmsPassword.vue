@@ -6,7 +6,7 @@ import PrimaryButton from "./PrimaryButton.vue"
 import SecondaryButton from "./SecondaryButton.vue"
 import TextInput from "./TextInput.vue"
 import { route } from "momentum-trail"
-import axios from "axios"
+import axios from "@/utilities/axios"
 import { UserPasswordData } from "@/types/models"
 
 defineProps({
