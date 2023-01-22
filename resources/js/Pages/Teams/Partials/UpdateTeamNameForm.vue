@@ -8,15 +8,12 @@ import PrimaryButton from "@/Components/PrimaryButton.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { PropType } from "vue"
 import { route } from "momentum-trail"
-import { TeamData, TeamPermissionsData, TeamUpdateData } from "@/types/models"
+import { TeamData, TeamUpdateData } from "@/types/models"
+import { can } from "momentum-lock"
 
 const props = defineProps({
     team: {
         type: Object as PropType<TeamData>,
-        required: true,
-    },
-    permissions: {
-        type: Object as PropType<TeamPermissionsData>,
         required: true,
     },
 })
@@ -72,7 +69,7 @@ const updateTeamName = () => {
                     v-model="form.name"
                     type="text"
                     class="mt-1 block w-full"
-                    :disabled="!permissions.canUpdateTeam" />
+                    :disabled="!can(team, 'update')" />
 
                 <InputError
                     :message="form.errors.name"
@@ -81,7 +78,7 @@ const updateTeamName = () => {
         </template>
 
         <template
-            v-if="permissions.canUpdateTeam"
+            v-if="can(team, 'update')"
             #actions>
             <ActionMessage
                 :on="form.recentlySuccessful"

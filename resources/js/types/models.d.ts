@@ -43,6 +43,18 @@ export type TeamData = {
     owner: UserData
     users: Array<UserData>
     team_invitations: Array<TeamInvitationData>
+    permissions: {
+        viewAny: boolean
+        view: boolean
+        create: boolean
+        update: boolean
+        addTeamMember: boolean
+        updateTeamMember: boolean
+        removeTeamMember: boolean
+        delete: boolean
+        denyWithStatus: boolean
+        denyAsNotFound: boolean
+    }
 }
 export type TeamInvitationData = {
     id?: number
@@ -54,12 +66,6 @@ export type TeamMemberData = {
     team_id?: number
     user_id?: number
     role: string
-}
-export type TeamPermissionsData = {
-    canAddTeamMembers: boolean
-    canDeleteTeam: boolean
-    canRemoveTeamMembers: boolean
-    canUpdateTeam: boolean
 }
 export type TeamUpdateData = {
     name: string

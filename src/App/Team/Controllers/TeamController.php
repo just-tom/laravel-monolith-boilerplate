@@ -7,7 +7,6 @@ use Domain\Team\Actions\Jetstream\CreateTeam;
 use Domain\Team\Actions\Jetstream\UpdateTeamName;
 use Domain\Team\Data\TeamCreateData;
 use Domain\Team\Data\TeamData;
-use Domain\Team\Data\TeamPermissionsData;
 use Domain\Team\Data\TeamUpdateData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -30,16 +29,10 @@ class TeamController extends Controller
         Gate::authorize('view', $team);
 
         return Jetstream::inertia()->render($request, 'Teams/Show', [
-            'team' => TeamData::fromModel($team->load('owner', 'users', 'teamInvitations')),
+            'team' => TeamData::from($team->load('owner', 'users', 'teamInvitations')),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,
-            'permissions' => TeamPermissionsData::from([
-                'canAddTeamMembers' => Gate::check('addTeamMember', $team),
-                'canDeleteTeam' => Gate::check('delete', $team),
-                'canRemoveTeamMembers' => Gate::check('removeTeamMember', $team),
-                'canUpdateTeam' => Gate::check('update', $team),
-            ]),
         ]);
     }
 

@@ -2,22 +2,23 @@
 
 namespace Domain\Team\Data;
 
-use Carbon\Carbon;
 use Domain\Team\Models\Team;
 use Domain\User\Data\UserData;
 use Domain\User\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
+use Momentum\Lock\Data\DataResource;
 use Spatie\LaravelData\Attributes\MapName;
-use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
 
-class TeamData extends Data
+class TeamData extends DataResource
 {
+    protected string $modelClass = Team::class;
+
     public function __construct(
         public readonly int | Optional $id,
         public readonly string $name,

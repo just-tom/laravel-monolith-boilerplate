@@ -36,6 +36,7 @@
         "vue-tsc": "^1.0.24"
     },
     "dependencies": {
+        "momentum-lock": "^0.1.2",
         "momentum-trail": "^0.2.2",
         "npm-run-all": "^4.1.5"
     }

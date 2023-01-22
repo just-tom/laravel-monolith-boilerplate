@@ -5,7 +5,8 @@ import SectionBorder from "@/Components/SectionBorder.vue"
 import TeamMemberManager from "@/Pages/Teams/Partials/TeamMemberManager.vue"
 import UpdateTeamNameForm from "@/Pages/Teams/Partials/UpdateTeamNameForm.vue"
 import { PropType } from "vue"
-import { RoleData, TeamData, TeamPermissionsData } from "@/types/models"
+import { RoleData, TeamData } from "@/types/models"
+import { can } from "momentum-lock"
 
 defineProps({
     team: {
@@ -15,10 +16,6 @@ defineProps({
     availableRoles: {
         type: Array as PropType<RoleData[]>,
         default: () => [],
-    },
-    permissions: {
-        type: Object as PropType<TeamPermissionsData>,
-        required: true,
     },
 })
 </script>
@@ -31,17 +28,14 @@ defineProps({
 
         <div>
             <div class="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8">
-                <UpdateTeamNameForm
-                    :team="team"
-                    :permissions="permissions" />
+                <UpdateTeamNameForm :team="team" />
 
                 <TeamMemberManager
                     class="mt-10 sm:mt-0"
                     :team="team"
-                    :available-roles="availableRoles"
-                    :user-permissions="permissions" />
+                    :available-roles="availableRoles" />
 
-                <template v-if="permissions.canDeleteTeam && !team.personal_team">
+                <template v-if="can(team, 'delete') && !team.personal_team">
                     <SectionBorder />
 
                     <DeleteTeamForm

@@ -14,7 +14,8 @@ import SecondaryButton from "@/Components/SecondaryButton.vue"
 import SectionBorder from "@/Components/SectionBorder.vue"
 import TextInput from "@/Components/TextInput.vue"
 import { route } from "momentum-trail"
-import { RoleData, TeamData, TeamInvitationData, TeamMemberData, TeamPermissionsData, UserData } from "@/types/models"
+import { RoleData, TeamData, TeamInvitationData, UserData } from "@/types/models"
+import { can } from "momentum-lock"
 
 const props = defineProps({
     team: {
@@ -24,10 +25,6 @@ const props = defineProps({
     availableRoles: {
         type: Array as PropType<RoleData[]>,
         default: () => [],
-    },
-    userPermissions: {
-        type: Object as PropType<TeamPermissionsData>,
-        required: true,
     },
 })
 
@@ -113,7 +110,7 @@ const displayableRole = (role: string | undefined) => {
 
 <template>
     <div>
-        <div v-if="userPermissions.canAddTeamMembers">
+        <div v-if="can(team, 'addTeamMember')">
             <SectionBorder />
 
             <!-- Add Team Member -->
@@ -221,7 +218,7 @@ const displayableRole = (role: string | undefined) => {
             </FormSection>
         </div>
 
-        <div v-if="team.team_invitations.length > 0 && userPermissions.canAddTeamMembers">
+        <div v-if="team.team_invitations.length > 0 && can(team, 'addTeamMember')">
             <SectionBorder />
 
             <!-- Team Member Invitations -->
@@ -247,7 +244,7 @@ const displayableRole = (role: string | undefined) => {
                             <div class="flex items-center">
                                 <!-- Cancel Team Invitation -->
                                 <button
-                                    v-if="userPermissions.canRemoveTeamMembers"
+                                    v-if="can(team, 'removeTeamMember')"
                                     class="ml-6 cursor-pointer text-sm text-red-500 focus:outline-none"
                                     @click="cancelTeamInvitation(invitation)">
                                     Cancel
@@ -288,7 +285,7 @@ const displayableRole = (role: string | undefined) => {
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
                                 <button
-                                    v-if="userPermissions.canAddTeamMembers && availableRoles.length"
+                                    v-if="can(team, 'addTeamMember') && availableRoles.length"
                                     class="ml-2 text-sm text-gray-400 underline"
                                     @click="manageRole(user)">
                                     {{ displayableRole(user.membership?.role) }}
@@ -310,7 +307,7 @@ const displayableRole = (role: string | undefined) => {
 
                                 <!-- Remove Team Member -->
                                 <button
-                                    v-else-if="userPermissions.canRemoveTeamMembers"
+                                    v-else-if="can(team, 'removeTeamMember')"
                                     class="ml-6 cursor-pointer text-sm text-red-500"
                                     @click="confirmTeamMemberRemoval(user)">
                                     Remove
