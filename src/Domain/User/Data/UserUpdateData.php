@@ -20,7 +20,7 @@ use Spatie\LaravelData\Optional;
 class UserUpdateData extends Data
 {
     public function __construct(
-        public readonly int | Optional $id,
+        public readonly string | Optional $id,
         public readonly string $name,
         public readonly string $email,
         public readonly ?string $profilePhotoPath,

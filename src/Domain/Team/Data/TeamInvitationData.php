@@ -22,7 +22,7 @@ class TeamInvitationData extends Data
 {
     public function __construct(
         public readonly int | Optional $id,
-        public readonly ?int $teamId,
+        public readonly ?string $teamId,
         public readonly string $email,
         public readonly string $role,
     ) {}

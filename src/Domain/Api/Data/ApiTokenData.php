@@ -20,7 +20,7 @@ class ApiTokenData extends Data
         public readonly ?array        $permissions,
         public readonly ?Carbon      $lastUsedAgo,
         public readonly string|null  $lastUsedAt,
-        public readonly ?int          $tokenableId,
+        public readonly ?string         $tokenableId,
         public readonly ?string       $tokenableType,
     )
     {

@@ -20,7 +20,7 @@ class TeamData extends DataResource
     protected string $modelClass = Team::class;
 
     public function __construct(
-        public readonly int | Optional $id,
+        public readonly string | Optional $id,
         public readonly string $name,
         public readonly bool $personalTeam,
         public readonly UserData $owner,

@@ -13,8 +13,8 @@ use Spatie\LaravelData\Optional;
 class TeamMemberData extends Data
 {
     public function __construct(
-        public readonly int | Optional $teamId,
-        public readonly int | Optional $userId,
+        public readonly string | Optional $teamId,
+        public readonly string | Optional $userId,
         public readonly string $role,
     ) {}
 }

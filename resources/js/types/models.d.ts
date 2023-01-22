@@ -10,7 +10,7 @@ export type ApiTokenData = {
     permissions: Array<string> | null
     last_used_ago: string | null
     last_used_at: string | null
-    tokenable_id: number | null
+    tokenable_id: string | null
     tokenable_type: string | null
 }
 export type NotificationData = {
@@ -41,7 +41,7 @@ export type TeamCreateData = {
     name: string
 }
 export type TeamData = {
-    id?: number
+    id?: string
     name: string
     personal_team: boolean
     owner: UserData
@@ -62,13 +62,13 @@ export type TeamData = {
 }
 export type TeamInvitationData = {
     id?: number
-    team_id: number | null
+    team_id: string | null
     email: string
     role: string
 }
 export type TeamMemberData = {
-    team_id?: number
-    user_id?: number
+    team_id?: string
+    user_id?: string
     role: string
 }
 export type TeamUpdateData = {
@@ -83,7 +83,7 @@ export type UserCreateData = {
     remember?: boolean | Array<string>
 }
 export type UserData = {
-    id?: number
+    id?: string
     name: string
     email: string
     email_verified_at: string | null
@@ -103,7 +103,7 @@ export type UserPasswordData = {
     password_confirmation: string
 }
 export type UserUpdateData = {
-    id?: number
+    id?: string
     name: string
     email: string
     profile_photo_path: string | null
