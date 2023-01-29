@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import ApiTokenManager from "@/Pages/API/Partials/ApiTokenManager.vue"
-import AppLayout from "@/Layouts/AppLayout.vue"
+import AppLayout from "@/Layouts/App/LayoutApp.vue"
 import { PropType } from "vue"
 import { ApiTokenData } from "@/types/models"
 

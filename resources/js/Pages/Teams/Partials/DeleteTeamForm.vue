@@ -2,9 +2,9 @@
 import { PropType, ref } from "vue"
 import { useForm } from "@inertiajs/vue3"
 import ActionSection from "@/Components/ActionSection.vue"
-import ConfirmationModal from "@/Components/ConfirmationModal.vue"
-import DangerButton from "@/Components/DangerButton.vue"
-import SecondaryButton from "@/Components/SecondaryButton.vue"
+import ConfirmationModal from "@/Components/Modals/ModalConfirmation.vue"
+import DangerButton from "@/Components/Buttons/ButtonDanger.vue"
+import SecondaryButton from "@/Components/Buttons/ButtonSecondary.vue"
 import { route } from "momentum-trail"
 import { TeamData, UserData } from "@/types/models"
 

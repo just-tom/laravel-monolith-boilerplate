@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { useForm } from "@inertiajs/vue3"
 import FormSection from "@/Components/FormSection.vue"
-import InputError from "@/Components/InputError.vue"
-import InputLabel from "@/Components/InputLabel.vue"
-import PrimaryButton from "@/Components/PrimaryButton.vue"
-import TextInput from "@/Components/TextInput.vue"
+import InputError from "@/Components/Inputs/InputError.vue"
+import InputLabel from "@/Components/Inputs/InputLabel.vue"
+import PrimaryButton from "@/Components/Buttons/ButtonPrimary.vue"
+import TextInput from "@/Components/Inputs/TextInput.vue"
 import { route } from "momentum-trail"
 import { TeamCreateData } from "@/types/models"
 

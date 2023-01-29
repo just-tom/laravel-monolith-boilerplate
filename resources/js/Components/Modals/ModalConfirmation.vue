@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Modal from "./Modal.vue"
+import Modal from "../Modal.vue"
 import { PropType } from "vue"
 import { UserData } from "@/types/models"
 defineProps({

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import AppLayout from "@/Layouts/AppLayout.vue"
+import AppLayout from "@/Layouts/App/LayoutApp.vue"
 import DeleteTeamForm from "@/Pages/Teams/Partials/DeleteTeamForm.vue"
 import SectionBorder from "@/Components/SectionBorder.vue"
 import TeamMemberManager from "@/Pages/Teams/Partials/TeamMemberManager.vue"
